@@ -1,12 +1,9 @@
 package com.xiaoxiaomo.redis.practice;
 
 import com.xiaoxiaomo.redis.util.JedisUtil;
-import org.junit.Test;
 import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.Response;
 import redis.clients.jedis.Transaction;
-
-import java.util.List;
 
 /**
  * 秒杀
@@ -31,21 +28,17 @@ public class Seckill {
     }
 
 
-    public static void fastSeckill( String user  ) {
+    public static void fastSeckill2( String user  ) {
         Jedis jedis = JedisUtil.getJedis();
         int stock = Integer.valueOf(jedis.get(TOTO_STOCK_KEY));//库存
         Integer snag_num = Integer.valueOf(jedis.get(SNAG_NUM_KEY));//抢到库存
 
         try {
-            if (snag_num < stock) {
+            if (snag_num <= stock) {
                 jedis.watch(SNAG_USER_KEY);
                 Transaction t = jedis.multi();
 
-                //用户抢到了第几件
-
-                synchronized (snag_num){
-                    snag_num++ ;
-                }
+                //用户抢到了第几件incr
 
                 t.hset(SNAG_USER_KEY, user, (snag_num) + "");
                 t.incr(SNAG_NUM_KEY);
@@ -62,12 +55,6 @@ public class Seckill {
 //                    fastSeckill( Thread.currentThread().getName() );
                 }
                 Thread.sleep(10);
-
-
-
-
-
-
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -75,6 +62,27 @@ public class Seckill {
             JedisUtil.returnRource(jedis);
         }
     }
+
+
+
+
+//    public static void fastSeckill( String user  ) {
+//        Jedis jedis = JedisUtil.getJedis();
+//        int stock = Integer.valueOf(jedis.get(TOTO_STOCK_KEY));//库存
+////        Integer snag_num = Integer.valueOf(jedis.get(SNAG_NUM_KEY));//抢到库存
+//
+//        Transaction t = jedis.multi();
+//        Response<Long> incr = t.incr(SNAG_NUM_KEY);
+//        if( < stock){
+//            t.hset(SNAG_USER_KEY, user, (snag_num) + "");
+//            System.out.println(user + "，成功抢购到第" + (snag_num) + "件！目前剩余库存：" + (stock - snag_num));
+//
+//        }else{
+//            System.out.println(user + "，抢购失败！目前剩余库存：" + (stock - snag_num));
+//        }
+//
+//
+//    }
 
 
         //Test
@@ -86,7 +94,7 @@ public class Seckill {
             th[i]=new Thread(
                 new Runnable() {
                     public void run() {
-                        fastSeckill(Thread.currentThread().getName());
+                        fastSeckill2(Thread.currentThread().getName());
                     }
                 }
             );
