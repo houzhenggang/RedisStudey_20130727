@@ -22,10 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="RedisStudey_20130727" />
         <module name="RedisStudey_20160427" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="RedisStudey_20130727" target="1.7" />
       <module name="RedisStudey_20160427" target="1.5" />
     </bytecodeTargetLevel>
   </component>

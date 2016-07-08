@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/RedisStudey_20130727.iml" filepath="$PROJECT_DIR$/RedisStudey_20130727.iml" />
       <module fileurl="file://$PROJECT_DIR$/RedisStudey_20160427.iml" filepath="$PROJECT_DIR$/RedisStudey_20160427.iml" />
     </modules>
   </component>
