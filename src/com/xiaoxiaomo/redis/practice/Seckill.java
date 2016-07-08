@@ -7,7 +7,7 @@ import redis.clients.jedis.Transaction;
 
 /**
  * 秒杀
- * Created by xiaoxiaomo on 2016/4/27.
+ * Created by xiaoxiaomo on 2013/4/27.
  */
 public class Seckill {
 

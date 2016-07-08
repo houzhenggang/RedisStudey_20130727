@@ -4,7 +4,7 @@ import com.xiaoxiaomo.redis.util.JedisUtil;
 import redis.clients.jedis.Jedis;
 
 /**
- * Created by xiaoxiaomo on 2016/4/28.
+ * Created by xiaoxiaomo on 2013/4/28.
  */
 public class InrcId {
 

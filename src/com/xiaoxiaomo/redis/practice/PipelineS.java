@@ -5,7 +5,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
 
 /**
- * Created by xiaoxiaomo on 2016/4/30.
+ * Created by xiaoxiaomo on 2013/4/30.
  */
 public class PipelineS {
 
